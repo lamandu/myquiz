@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+        <ion-button color="primary" (click)="closeModal()">
+            <ion-icon name="close" color="light"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+	  <ion-label *ngIf="percentAcertos>0">{{percentAcertos.toFixed(2)}} % acertos </ion-label>
+
+	  <ion-buttons slot="end">
+		  <ion-button (click)="restart()" >
+			  <ion-icon slot="icon-only" name="refresh"></ion-icon>
+		  </ion-button>
+	  </ion-buttons>
+
+	  <ion-buttons slot="end">
+		  <ion-button (click)="calculaAcertos()" >
+			  <ion-icon slot="icon-only" name="save"></ion-icon>
+		  </ion-button>
+	  </ion-buttons>
+
+    <ion-title>
+    	Questão {{this.index + 1}} / {{this.iTems.length}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+	<ion-list>
+			<ion-list-header>
+				<ion-card-content>{{this.questao.enunciado}}</ion-card-content>
+			</ion-list-header>
+			<ion-item *ngFor="let item of this.questao.opcoes">
+				<ion-icon *ngIf="item.key===this.questao.resposta" class="myIconSelect" name="checkmark"></ion-icon>
+				<ion-card-content [ngClass]="isRight(item.key)"  (click)="answer(item.key)">
+					<label>{{item.value}}</label>
+				</ion-card-content>
+			</ion-item>
+
+	</ion-list>
+
+</ion-content>
+
+<ion-footer no-shadow>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+			<ion-button (click)="anterior()"  >
+				<ion-icon slot="icon-only" name="skip-backward"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+		<ion-buttons slot="end">
+			<ion-button (click)="proxima()" >
+				<ion-icon slot="icon-only" name="skip-forward"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+
+	</ion-toolbar>
+</ion-footer>
+
